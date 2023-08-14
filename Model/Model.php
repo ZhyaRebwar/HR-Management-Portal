@@ -12,11 +12,6 @@ class Model
         $this->db = (new Db())->pdoObject;
     }
 
-    public function add(){
-        $statement = $this->db->query("insert into accounts (username,email,password) values('zhya123', 'zhya@gmail.com', 'abc1')");
-        echo "\n account added \n";
-    }
-
 
     protected string $query;
     protected function begin(): self
