@@ -16,28 +16,7 @@ class Users extends Model
             ->columns('username, email, password')
             ->values(':username, :email, :password');
             
-        // $statement = $this->db->prepare($sql->query);
-
-        // $statement->execute( 
-        //     [ 
-        //     'username' => $username,
-        //     'email' => $email,
-        //     'password' => $password
-        //     ] );      
-
-        //second insert
-
-
         
-        // $statement = $this->db->prepare($sql->query);
-        // $statement->execute( 
-        //     [ 
-        //     'id'=>$lastInsertId,
-        //     'first_name'=>$first_name,
-        //     'last_name'=>$last_name
-        //     ] );
-
-        // $commit = $this->db->commit();
     }
 
     public function addEmployeeInfo(string $first_name, string $last_name): void
