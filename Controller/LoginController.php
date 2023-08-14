@@ -18,7 +18,7 @@ class LoginController
     public function post(string $username, string $password )
     {
 
-        //kak omer's idea.
+      
         // test();
 
         $this->loginObj->checkLogin( $username, $password );
