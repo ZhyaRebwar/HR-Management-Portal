@@ -2,33 +2,26 @@
 
 namespace Classes;
 
-class Route 
+class Route
 {
 
-    
-    public function resolve(string $class, string $method, ?array $params)
+
+    public function resolve(string $class, string $method, ?array $params): void
     {
-    
+
         $this->$method($class, $method, $params);
-       
-
     }
 
-    public function get()
+    public function get($class, string $method, ?array $params): void
     {
-        echo 'get is invoked';
+        var_dump($class . ' is the class' . "\n" . 'get is invoked');
+        $obj = new $class();
+        call_user_func([$obj, $method], $params);
     }
 
-    public function post( $class, string $method, ?array $params)
+    public function post($class, string $method, ?array $params): void
     {
         $obj = new $class();
-        call_user_func( [ $obj, $method], ...$params );
-
+        call_user_func([$obj, $method], ...$params);
     }
-
-
-
-
-
-
 }

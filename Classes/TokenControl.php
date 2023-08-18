@@ -11,7 +11,7 @@ class TokenControl
         echo json_encode( $email );
     }
 
-    public function checkToken()
+    public function checkToken(): bool
     {
         
         //to get the authorization header
@@ -24,9 +24,15 @@ class TokenControl
 
         //to check whether you loged in or not
         if(  $auth ) 
+        {
             echo json_encode( ["result"=>true]);
+            return true; //to check it is Loged in
+        }
         else
+        {
             echo json_encode( ["result"=>false]);
+            return false;
+        }
 
     }
 

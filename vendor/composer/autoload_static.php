@@ -23,6 +23,10 @@ class ComposerStaticInitddfd423d7c0c4ea5fdd92da6cdc23ba0
         array (
             'PhpOption\\' => 10,
         ),
+        'O' => 
+        array (
+            'Operations\\' => 11,
+        ),
         'M' => 
         array (
             'Model\\' => 6,
@@ -58,6 +62,10 @@ class ComposerStaticInitddfd423d7c0c4ea5fdd92da6cdc23ba0
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'Operations\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Operations',
         ),
         'Model\\' => 
         array (

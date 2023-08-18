@@ -3,7 +3,7 @@
 namespace Model;
 use Classes\Db;
 
-class Model
+abstract class Model
 {
 
     public $db;
@@ -51,14 +51,14 @@ class Model
 
     protected function insert(): self
     {
-        $this->query = "INSERT INTO";
+        $this->query = 'INSERT INTO';
 
         return $this;
     }
 
     protected function columns(string $string = "" ): self
     {
-        $string = empty($string) ? "" : "($string)";
+        $string = empty($string) ? '' : "($string)";
         $this->query .= " $string";
 
         return $this;
@@ -72,7 +72,7 @@ class Model
 
     protected function update(): self
     {
-        $this->query = "UPDATE";
+        $this->query = 'UPDATE';
 
         return $this;
     }
@@ -85,9 +85,22 @@ class Model
 
     protected function delete(): self
     {
-        $this->query = "DELETE FROM";
+        $this->query = 'DELETE FROM';
 
         return $this;
     }
 
+    protected function innerJoin(): self
+    {
+        $this->query .= ' INNER JOIN ';
+
+        return $this;
+    }
+
+    protected function on(string $column1, string $column2): self
+    {
+        $this->query .= " ON $column1 = $column2";
+
+        return $this;
+    }
 }

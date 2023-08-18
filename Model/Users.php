@@ -15,22 +15,28 @@ class Users extends Model
             ->table('accounts')
             ->columns('username, email, password')
             ->values(':username, :email, :password');
-            
-        
     }
 
-    public function addEmployeeInfo(string $first_name, string $last_name): void
+    public function addEmployeeInfo(int $lastInsertId, string $first_name, string $last_name): void
     {
-        $lastInsertId = $this->db->lastInsertId();
 
         $sql = $this
             ->insert()
             ->table('employees_information')
             ->columns('id, first_name, last_name')
-            ->values(':id, :first_name, :last_name');
-
+            ->values(":id, :first_name, :last_name");
     }
-    
+
+    public function addEmployeeBenefits(int $lastInsertId, string $title, int $salary): void
+    {
+
+        $sql = $this
+            ->insert()
+            ->table('employee_benefits')
+            ->columns('id, title, salary')
+            ->values(":id, :title, :salary");
+    }
+
     public function query(): string
     {
         return $this->query;
@@ -42,16 +48,31 @@ class Users extends Model
             ->select()
             ->table('accounts')
             ->condition('username =:username AND password =:password');
-
     }
 
-    public function userLevel(string $username): void
+    public function userLevel(int $id): void
     {
         $sql = $this
-            ->select()
+            ->select('title')
             ->table('accounts')
-            ->condition('username =: username');
-
+            ->innerJoin()
+            ->table('employee_benefits')
+            ->on('accounts.id', 'employee_benefits.id')
+            ->condition('accounts.id =:id');
     }
 
+    public function selectUser(): void
+    {
+        $this
+            ->select()
+            ->table('accounts')
+            ->innerJoin()
+            ->table('employees_information')
+            ->on('accounts.id', 'employees_information.id')
+            ->innerJoin()
+            ->table('employee_benefits')
+            ->on('accounts.id', 'employee_benefits.id')
+            ->condition('accounts.id =:id');
+
+    }
 }

@@ -15,7 +15,7 @@ class LoginController
         $this->loginObj = new Users();
     }
 
-    public function post(string $username, string $password )
+    public function post(string $username, string $password ): void
     {
 
       
@@ -31,9 +31,9 @@ class LoginController
                 'password' => $password
             ] );
 
-        $result = $statement->fetch();
+        $result = $statement -> fetch();
 
-        (new TokenControl)->createToken( $result );
+        (new TokenControl) -> createToken( $result );
 
         
     }
