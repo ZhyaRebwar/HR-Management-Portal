@@ -97,6 +97,13 @@ abstract class Model
         return $this;
     }
 
+    protected function and(): self
+    {
+        $this->query .= ' AND ';
+
+        return $this;
+    }
+
     protected function on(string $column1, string $column2): self
     {
         $this->query .= " ON $column1 = $column2";
