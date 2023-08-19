@@ -75,4 +75,14 @@ class Users extends Model
             ->condition('accounts.id =:id');
 
     }
+
+    public function checkEmployeeExist(): void
+    {
+        $this
+            ->select('id')
+            ->table('employee_management')
+            ->condition('manager_id =:id_self')
+            ->and()
+            ->condition('employee_id =:id_user');
+    }
 }
