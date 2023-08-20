@@ -18,7 +18,7 @@ class SignupController
         string $first_name, 
         string $last_name,
         string $title,
-        int $salary
+        int $salary,
         ): void
     {
 
@@ -61,6 +61,21 @@ class SignupController
             'title'=>$title,
             'salary'=>$salary
             ] );
+
+        //check wether it is employee if it is then go... and add manager
+        //fourth insert adding manager to the employee
+        //we add the manager later on by another way(another path).
+
+        // $this->signupObj->addEmployeeManager();
+
+        // $statement =$this -> signupObj -> db -> prepare( $this->signupObj->query() );
+
+        // $statement -> execute(
+        //     [
+        //         'manager_id' => $manager,
+        //         'employee_id' => $lastInsertId
+        //     ] );
+
 
         $this->signupObj->db->commit();
 
