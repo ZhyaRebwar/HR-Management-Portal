@@ -97,12 +97,14 @@ abstract class Model
         return $this;
     }
 
-    protected function and(): self
-    {
-        $this->query .= ' AND ';
+    //there is problem related to this method because of condition method
+    //modifications later on required.
+    // protected function and(): self
+    // {
+    //     $this->query .= ' AND ';
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     protected function on(string $column1, string $column2): self
     {
