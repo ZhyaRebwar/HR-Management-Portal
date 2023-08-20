@@ -17,8 +17,28 @@ class SupervisorController
     }
     
     
-    public function get():void
+    // public function get():void
+    // {
+    //     echo "\n supervisor is invoked \n";
+    // }
+
+    public function checkEmployee(int $id_self, int $id_user): bool
     {
-        echo "\n supervisor is invoked \n";
+        //check whether the employee works for the supervisor selected.
+        
+        $this->userObj->checkEmployeeExist();
+
+        $statement = $this->userObj->db->prepare( $this->userObj->query() );
+
+        $statement -> execute(
+            [
+                'manager_id' => $id_self,
+                'employee_id' => $id_user
+            ] );
+
+            $result = $statement -> fetch();
+
+
+        return $result ? true : false;
     }
 }

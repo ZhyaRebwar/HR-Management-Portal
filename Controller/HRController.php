@@ -3,11 +3,13 @@
 namespace Controller;
 
 use Model\Users;
+use Operations\DeleteTrait;
 use Operations\ViewTrait;
 
 class HRController
 {
     use ViewTrait;
+    use DeleteTrait;
 
     private Users $userObj;
 
@@ -21,4 +23,6 @@ class HRController
     // {
     //     echo "\n hr is invoked \n";
     // }
+
+    
 }

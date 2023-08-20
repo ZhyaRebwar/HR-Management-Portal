@@ -3,11 +3,13 @@
 namespace Controller;
 
 use Model\Users;
+use Operations\DeleteTrait;
 use Operations\ViewTrait;
 
 class AdministratorController
 {
     use ViewTrait;
+    use DeleteTrait;
 
     private Users $userObj;
 
@@ -18,10 +20,10 @@ class AdministratorController
 
 
 
-    public function get(string $a):void
-    {
-        echo "\n Admin is invoked \n";
-    }
+    // public function get(string $a):void
+    // {
+    //     echo "\n Admin is invoked \n";
+    // }
 
     
     
