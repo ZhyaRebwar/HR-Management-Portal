@@ -42,11 +42,13 @@ class App
 
         if( preg_match( '/[0-9]+/', $url ) )
         {
-            //gets the leverl name
+            //gets the lever name
             $id_user = $this->identify( (int) $url_id[2] );
+
             //here we get the 4th index, so that we can later check whether the operation is on another is or same user.
-            if( !(int) $url_id[4] )
+            if( (int) $url_id[4] )
                 $id_user2 = $this->identify( (int) $url_id[4] );
+
             $id = [
                 'id_self' => $url_id[2],
                 'id_user'=> $url_id[4],
@@ -54,9 +56,9 @@ class App
                 'title_user' => $id_user2
             ];
 
+
             $body['users'] = $id;
 
-            //$this->loginPathClass = 
             $this->getClass( $id_user );
 
             $url = preg_replace( "/[0-9]+/", '[id]', $url);
@@ -81,17 +83,22 @@ class App
     {        
 
         $this->route= [
-            "post" => 
+            'post' => 
             [
                 '/HR-Management-Portal/signup/' => SignupController::class,
                 '/HR-Management-Portal/login/' => LoginController::class,
                 '/HR-Management-Portal/logout/' => LogoutController::class
             ],
-            "get" => 
+            'get' => 
             [
                 // '/HR-Management-Portal/[id]/information/' => 'controller\\'.$this->loginPathClass
-                '/HR-Management-Portal/[id]/information/' => $this->loginPathClass
+                '/HR-Management-Portal/[id]/information/' => $this->loginPathClass,
+                '/HR-Management-Portal/[id]/information/[id]' => $this->loginPathClass
                 // '/HR-Management-Portal/[id]/information/' => AdministratorController::class
+            ],
+            'delete' =>
+            [
+                '/HR-Management-Portal/[id]/information/[id]' => $this->loginPathClass
             ]
         ];
 
@@ -115,12 +122,12 @@ class App
     private function getClass(string $class): void
     {
         $classes = [
-            'Administrator' => AdministratorController::class,
+            'administrator' => AdministratorController::class,
             'hr' => HRController::class,
             'employee' => EmployeeController::class,
             'supervisor' => SupervisorController::class
         ];
-
+        
         $this->loginPathClass = $classes[$class];
         $this->routes();
 
