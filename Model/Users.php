@@ -37,6 +37,15 @@ class Users extends Model
             ->values(":id, :title, :salary");
     }
 
+    public function addEmployeeManager(): void
+    {
+        $this
+            ->insert()
+            ->table('employee_management')
+            ->columns('manager_id', 'employee_id')
+            ->values(":manager_id, :employee_id");
+    }
+
     public function query(): string
     {
         return $this->query;
@@ -79,10 +88,17 @@ class Users extends Model
     public function checkEmployeeExist(): void
     {
         $this
-            ->select('id')
+            ->select()
             ->table('employee_management')
-            ->condition('manager_id =:id_self')
-            ->and()
-            ->condition('employee_id =:id_user');
+            ->condition('manager_id =:manager_id AND employee_id =:employee_id');
+    
+    }
+
+    public function deleteUser(): void
+    {
+        $this
+            ->delete()
+            ->table('accounts')
+            ->condition('id =:id');
     }
 }
