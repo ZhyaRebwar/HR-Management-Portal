@@ -2,22 +2,29 @@
 
 namespace Constants;
 
-enum UserTitles: string
+enum UserTitles
 {
 
-    case Administrator = 'Administrator';
-    case Hr = 'Hr';
-    case Supervisor = 'Supervisor';
-    case Employee = 'Employee';
+    private const Administrator = 'administrator';
+    private const Hr = 'hr';
+    private const Supervisor = 'supervisor';
+    private const Employee = 'employee';
 
-    public static function checkAuthorization(): array
+    public static function checkAuthorizationView(): array
     {
         return [
-            UserTitles::Administrator => ['Administrator', 'Hr', 'Supervisor', 'Employee'],
-            UserTitles::Hr => ['Administrator', 'Hr', 'Supervisor', 'Employee'],
-            UserTitles::Supervisor => ['Employee']
+            UserTitles::Administrator => ['administrator', 'hr', 'supervisor', 'employee'],
+            UserTitles::Hr => ['administrator', 'hr', 'supervisor', 'employee'],
+            UserTitles::Supervisor => ['employee']
         ];
     }
 
+    public static function checkAuthorizationDelete(): array
+    {
+        return [
+            UserTitles::Administrator => ['administrator', 'hr', 'supervisor', 'employee'],
+            UserTitles::Hr => [ 'hr', 'supervisor', 'employee']
+        ];
+    }
     
 }
