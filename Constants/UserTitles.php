@@ -14,7 +14,7 @@ enum UserTitles
     {
         return [
             UserTitles::Administrator => ['administrator', 'hr', 'supervisor', 'employee'],
-            UserTitles::Hr => ['administrator', 'hr', 'supervisor', 'employee'],
+            UserTitles::Hr => [ 'hr', 'supervisor', 'employee'],
             UserTitles::Supervisor => ['employee']
         ];
     }
