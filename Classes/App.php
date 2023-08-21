@@ -13,7 +13,6 @@ use Controller\SupervisorController;
 use Exception;
 
 
-
 class App
 {
 
@@ -23,12 +22,10 @@ class App
     public function __construct(private string $url, private string $method)
     {
         $url = explode("?", $url)[0];
-        
-        
-
+    
     }
 
-    public function run()
+    public function run(): void
     {
         
 
@@ -59,22 +56,20 @@ class App
 
             $body['users'] = $id;
 
-            $this->getClass( $id_user );
+            $this -> getClass( $id_user );
 
+            //making the uri match the routes
             $url = preg_replace( "/[0-9]+/", '[id]', $url);
         }
 
-        if( isset( $this->route[$method][$url] ) )
+        if( !isset( $this->route[$method][$url] ) )
         {
-            // echo "it exists \n";
-        }else
-        {
-            // echo "it doesn't exist \n";
+            // throw exception(no routes found)
         }
 
   
         
-       
+        $this -> routes();
 
         (new Route)->resolve( $this->route[$method][$url] , $method, $body);
     }
@@ -98,7 +93,12 @@ class App
             ],
             'delete' =>
             [
-                '/HR-Management-Portal/[id]/information/[id]' => $this->loginPathClass
+                '/HR-Management-Portal/[id]/delete/[id]' => $this->loginPathClass
+            ],
+            'put'||'patch' =>
+            [
+                '/HR-Management-Portal/[id]/update/[id]' => $this->loginPathClass,
+                '/HR-Management-Portal/[id]/update/'
             ]
         ];
 
@@ -111,7 +111,6 @@ class App
     {
         //we connect to database here and get the class of the loged in user
         //in cases where we loged in the id of the user will be the third index
-        // $id = (int)explode( '/' , $this->url )[2];
         
         //now connect to database to know the class type
         $result = (new Identifier) -> identify($id);
@@ -121,6 +120,7 @@ class App
 
     private function getClass(string $class): void
     {
+
         $classes = [
             'administrator' => AdministratorController::class,
             'hr' => HRController::class,
@@ -128,10 +128,8 @@ class App
             'supervisor' => SupervisorController::class
         ];
         
-        $this->loginPathClass = $classes[$class];
-        $this->routes();
+        $this -> loginPathClass = $classes[$class];
 
-        // return $classes[$class];
     }
   
 }

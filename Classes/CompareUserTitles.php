@@ -23,7 +23,7 @@ class CompareUserTitles
         return false;   
     }
 
-    public function compareDelete(string $title_self, string$title_user ): bool
+    public function compareDelete(string $title_self, string $title_user ): bool
     {
         $deleteAuth = UserTitles::checkAuthorizationDelete();
         if( in_array( $title_user, $deleteAuth[$title_self] ))
@@ -31,4 +31,13 @@ class CompareUserTitles
 
         return false;
     }
+
+    public function compareUpdate(string $title_self, string $title_user): bool
+    {
+        $updateAuth = UserTitles::checkAuthorizationUpdate();
+        if( in_array($title_user, $updateAuth[$title_self] ))
+            return true;
+
+        return false;
+    }   
 }

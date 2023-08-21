@@ -8,6 +8,7 @@ class Identifier
 {
 
     private Users $dbObj; 
+
     public function __construct()
     {
         $this->dbObj = new Users();   
@@ -15,11 +16,14 @@ class Identifier
 
     public function identify(int $id): string
     {
-        $this->dbObj->userLevel($id);
+        $this -> dbObj -> userLevel($id);
 
-        $statement = $this->dbObj->db->prepare( $this->dbObj->query() );
+        $statement = $this 
+            -> dbObj 
+            -> db 
+            -> prepare( $this -> dbObj -> query() );
 
-        $statement->execute(
+        $statement -> execute(
             [
                 'id' => $id
             ] );

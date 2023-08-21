@@ -12,20 +12,22 @@ class LoginController
 
     public function __construct()
     {
-        $this->loginObj = new Users();
+        $this -> loginObj = new Users();
     }
 
     public function post(string $username, string $password ): void
     {
 
-      
         // test();
 
-        $this->loginObj->checkLogin( $username, $password );
+        $this -> loginObj -> checkLogin( $username, $password );
 
-        $statement = $this->loginObj->db->prepare( $this->loginObj->query() );
+        $statement = $this 
+            -> loginObj 
+            -> db 
+            -> prepare( $this -> loginObj -> query() );
 
-        $statement->execute(
+        $statement -> execute(
             [
                 'username' => $username,
                 'password' => $password

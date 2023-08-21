@@ -6,9 +6,10 @@ use Model\Users;
 class SignupController
 {
     private Users $signupObj;
+
     public function __construct()
     {
-        $this->signupObj =  new Users();  
+        $this -> signupObj = new Users();  
     }
 
     public function post(
@@ -24,51 +25,63 @@ class SignupController
 
       
 
-        $this->signupObj->db->beginTransaction();
+        $this -> signupObj -> db -> beginTransaction();
 
-        $this->signupObj->createAccount( $username, $email, $password);
+        $this -> signupObj -> createAccount( $username, $email, $password);
 
-        $statement = $this->signupObj->db->prepare($this->signupObj->query() );
+        $statement = $this 
+            -> signupObj 
+            -> db 
+            -> prepare($this -> signupObj -> query() );
 
-        $statement->execute( 
+        $statement -> execute( 
             [ 
             'username' => $username,
             'email' => $email,
             'password' => $password
-            ] );   
+            ]);   
 
         
         //second insert
-        $lastInsertId = $this->signupObj->db->lastInsertId();
-        $this->signupObj->addEmployeeInfo($lastInsertId, $first_name, $last_name);
+        $lastInsertId = $this -> signupObj -> db -> lastInsertId();
+        $this -> signupObj -> addEmployeeInfo( $lastInsertId, $first_name, $last_name);
 
-        $statement = $this->signupObj->db->prepare($this->signupObj->query() );
+        $statement = $this 
+            -> signupObj 
+            -> db 
+            -> prepare($this -> signupObj -> query() );
 
-        $statement->execute([ 
+        $statement -> execute([ 
             'id' => $lastInsertId,
             'first_name' => $first_name,
             'last_name' => $last_name
         ]);
 
         //third insert
-        $this->signupObj->addEmployeeBenefits($lastInsertId, $title, $salary);
+        $this -> signupObj -> addEmployeeBenefits( $lastInsertId, $title, $salary);
         
-        $statement = $this->signupObj->db->prepare($this->signupObj->query() );
+        $statement = $this 
+            -> signupObj 
+            -> db 
+            -> prepare($this -> signupObj -> query() );
 
-        $statement->execute( 
+        $statement -> execute( 
             [ 
             'id' => $lastInsertId,
-            'title'=>$title,
-            'salary'=>$salary
-            ] );
+            'title' => $title,
+            'salary' => $salary
+            ]);
 
         //check wether it is employee if it is then go... and add manager
         //fourth insert adding manager to the employee
         //we add the manager later on by another way(another path).
 
-        // $this->signupObj->addEmployeeManager();
+        // $this -> signupObj -> addEmployeeManager();
 
-        // $statement =$this -> signupObj -> db -> prepare( $this->signupObj->query() );
+        // $statement = $this 
+            // -> signupObj 
+            // -> db 
+            // -> prepare( $this->signupObj->query() );
 
         // $statement -> execute(
         //     [
@@ -77,7 +90,7 @@ class SignupController
         //     ] );
 
 
-        $this->signupObj->db->commit();
+        $this -> signupObj -> db -> commit();
 
         echo "account has been created";
     }

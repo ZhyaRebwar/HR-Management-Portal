@@ -15,16 +15,8 @@ class AdministratorController
 
     public function __construct()
     {
-        $this->userObj = new Users();
+        $this -> userObj = new Users();
     }
 
-
-
-    // public function get(string $a):void
-    // {
-    //     echo "\n Admin is invoked \n";
-    // }
-
-    
     
 }

@@ -7,25 +7,19 @@ use Classes\CompareUserTitles;
 trait ViewTrait
 {
 
-    public function get(?array $params): void
+    public function get(array $params): void
     {
         //to get the user portion of the array.
         $params = $params['users'];
 
-        $class = __CLASS__;
-        echo "\n$class is invoked \n";
-        // var_dump( $params );
-
-        if (!$params['id_user']) {
-            // echo "true";
-            $this->view(
+        if (!$params['id_user']) 
+            $this -> view(
                 $params['id_self'],
                 $params['title_self']
             );
-        } else {
-            // echo "false";
-            $this->viewUser(...$params);
-        }
+        else 
+            $this -> viewUser(...$params);
+        
     }
 
     public function viewUser(int $id_self, int $id_user, string $title_self, string $title_user): void
@@ -43,7 +37,7 @@ trait ViewTrait
         //2. get the user from the database and do it by calling the view method.    
         if( $compareResult & $checkEmployee)
         {
-            $result = $this->getUser($id_user );
+            $result = $this -> getUser( $id_user );
             echo json_encode( $result );
         }
         else
@@ -55,8 +49,7 @@ trait ViewTrait
     //done.
     public function view(int $id, string $title): void
     {
-        echo "\nView is activated";
-        $result = $this->getUser($id, $title);
+        $result = $this -> getUser($id, $title);
 
         echo json_encode( $result );
     }
@@ -64,9 +57,12 @@ trait ViewTrait
     public function getUser(int $id ): array
     {
 
-        $this->userObj->selectUser();
+        $this -> userObj -> selectUser();
 
-        $statement = $this->userObj->db->prepare( $this->userObj->query() );
+        $statement = $this 
+            -> userObj 
+            -> db
+            -> prepare( $this -> userObj -> query() );
 
         $statement -> execute(
             [

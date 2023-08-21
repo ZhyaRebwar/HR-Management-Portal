@@ -7,7 +7,7 @@ use Classes\CompareUserTitles;
 trait DeleteTrait
 {
 
-    public function delete(?array $params): void
+    public function delete(array $params): void
     {
         $params = $params['users'];
 
@@ -32,9 +32,12 @@ trait DeleteTrait
     public function deleteUser(int $id ): void
     {
 
-        $this->userObj->deleteUser();
+        $this -> userObj -> deleteUser();
 
-        $statement = $this->userObj->db->prepare( $this->userObj->query() );
+        $statement = $this 
+            -> userObj 
+            -> db 
+            -> prepare( $this -> userObj -> query() );
 
         $statement -> execute(
             [

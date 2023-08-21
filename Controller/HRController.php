@@ -15,14 +15,8 @@ class HRController
 
     public function __construct()
     {
-        $this->userObj = new Users();
+        $this -> userObj = new Users();
     }
     
-    
-    // public function get():void
-    // {
-    //     echo "\n hr is invoked \n";
-    // }
-
     
 }

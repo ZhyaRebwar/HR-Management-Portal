@@ -13,22 +13,20 @@ class SupervisorController
 
     public function __construct()
     {
-        $this->userObj = new Users();
+        $this -> userObj = new Users();
     }
-    
-    
-    // public function get():void
-    // {
-    //     echo "\n supervisor is invoked \n";
-    // }
+
 
     public function checkEmployee(int $id_self, int $id_user): bool
     {
         //check whether the employee works for the supervisor selected.
         
-        $this->userObj->checkEmployeeExist();
+        $this -> userObj -> checkEmployeeExist();
 
-        $statement = $this->userObj->db->prepare( $this->userObj->query() );
+        $statement = $this 
+            -> userObj 
+            -> db 
+            -> prepare( $this->userObj->query() );
 
         $statement -> execute(
             [

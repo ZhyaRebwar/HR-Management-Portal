@@ -5,7 +5,7 @@ namespace Classes;
 class TokenControl 
 {
 
-    public function createToken(array $email)
+    public function createToken(array $email): void
     {
         //create token (just email for now)
         echo json_encode( $email );
@@ -36,9 +36,8 @@ class TokenControl
 
     }
 
-    public function destroyToken()
+    public function destroyToken(): void
     {
-        
         echo json_encode( ['logout' => true] );
     }
 }

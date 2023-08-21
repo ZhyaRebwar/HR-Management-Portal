@@ -14,14 +14,9 @@ class EmployeeController
 
     public function __construct()
     {
-        $this->userObj = new Users();
+        $this -> userObj = new Users();
     }
 
     
-    // this case will override the one in the trait.
-    // public function get():void
-    // {
-    //     echo 'hey';
-    // }
 
 }

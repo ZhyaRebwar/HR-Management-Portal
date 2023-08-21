@@ -26,5 +26,13 @@ enum UserTitles
             UserTitles::Hr => [ 'hr', 'supervisor', 'employee']
         ];
     }
+
+    public static function checkAuthorizationUpdate(): array
+    {
+        return [
+            UserTitles::Administrator => ['administrator', 'hr', 'supervisor', 'employee'],
+            UserTitles::Hr => ['hr', 'supervisor', 'employee']
+        ];
+    }
     
 }

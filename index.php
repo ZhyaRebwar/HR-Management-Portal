@@ -12,4 +12,4 @@ header("Content-Type: application/json");
 error_reporting( E_ALL & ~E_WARNING);
 
 
-(new App($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']))->routes()->run();
+(new App($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'])) -> run();
