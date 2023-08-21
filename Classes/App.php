@@ -86,19 +86,17 @@ class App
             ],
             'get' => 
             [
-                // '/HR-Management-Portal/[id]/information/' => 'controller\\'.$this->loginPathClass
-                '/HR-Management-Portal/[id]/information/' => $this->loginPathClass,
-                '/HR-Management-Portal/[id]/information/[id]' => $this->loginPathClass
-                // '/HR-Management-Portal/[id]/information/' => AdministratorController::class
+                '/HR-Management-Portal/[id]/information/' => $this -> loginPathClass,
+                '/HR-Management-Portal/[id]/information/[id]' => $this -> loginPathClass
             ],
             'delete' =>
             [
-                '/HR-Management-Portal/[id]/delete/[id]' => $this->loginPathClass
+                '/HR-Management-Portal/[id]/delete/[id]' => $this -> loginPathClass
             ],
-            'put'||'patch' =>
+            'put' || 'patch' =>
             [
-                '/HR-Management-Portal/[id]/update/[id]' => $this->loginPathClass,
-                '/HR-Management-Portal/[id]/update/'
+                '/HR-Management-Portal/[id]/update/[id]' => $this -> loginPathClass,
+                '/HR-Management-Portal/[id]/update/' => $this -> loginPathClass
             ]
         ];
 
