@@ -46,7 +46,6 @@ trait ViewTrait
 
     }
 
-    //done.
     public function view(int $id, string $title): void
     {
         $result = $this -> getUser($id, $title);

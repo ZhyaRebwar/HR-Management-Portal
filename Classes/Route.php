@@ -12,7 +12,6 @@ class Route
 
     private function get($class, string $method, ?array $params): void
     {
-        var_dump($class . ' is the class' . "\n" . 'get is invoked');
         $obj = new $class();
         call_user_func([$obj, $method], $params);
     }
