@@ -3,6 +3,7 @@
 namespace Operations;
 
 use Classes\CompareUserTitles;
+use Exceptions\NoAuthException;
 
 trait DeleteTrait
 {
@@ -16,6 +17,9 @@ trait DeleteTrait
 
     public function removeUser(int $id_self, int $id_user, string $title_self, string $title_user): void
     {
+        try
+        {
+
         //1. check wether the user has the ability to delete this type of user.
         $compareResult = (new CompareUserTitles) -> compareDelete($title_self, $title_user);
         
@@ -26,7 +30,13 @@ trait DeleteTrait
             echo json_encode( ['result' => 'record has been deleted'] );
         }
         else
-            echo json_encode( ['result' => 'error' ] );   
+            throw new NoAuthException; 
+            
+        }
+        catch( NoAuthException $e)
+        {
+            echo json_encode( ['Error' => $e -> errorMessage() ] );
+        }
     }
 
     public function deleteUser(int $id ): void
