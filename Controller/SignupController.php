@@ -1,6 +1,7 @@
 <?php
 
 namespace Controller;
+
 use Model\Users;
 
 class SignupController
@@ -18,8 +19,16 @@ class SignupController
         string $password, 
         string $first_name, 
         string $last_name,
+        int $phone_number,
+        string $date_of_birth,
+        string $city,
+        int $relationship,
         string $title,
         int $salary,
+        int $bonus,
+        // string $appointed_at,
+        int $manager_id = null
+        // int $employee_id = null
         ): void
     {
 
@@ -72,25 +81,64 @@ class SignupController
             'salary' => $salary
             ]);
 
-        //check wether it is employee if it is then go... and add manager
-        //fourth insert adding manager to the employee
-        //we add the manager later on by another way(another path).
+        // fourth insert adding manager to the employee
+        //we check wether is is employee -> add manager to it
+        //manager -> add employees on the road later on separately(by using put or patch)
+        
+        
+        $this -> signupObj -> setTable('employee_benefits');
+        $this -> signupObj -> setColumn('title');
+        $this -> signupObj -> setCondition('id =:id');
 
-        // $this -> signupObj -> addEmployeeManager();
+        $this -> signupObj -> selectQuery(
+            $this -> signupObj -> getColumn(),
+            $this -> signupObj -> getTable(),
+            $this -> signupObj -> getCondition()
+        );
 
-        // $statement = $this 
-            // -> signupObj 
-            // -> db 
-            // -> prepare( $this->signupObj->query() );
+        $statement = $this 
+          -> signupObj 
+          -> db
+          -> prepare( $this -> signupObj -> query() );
 
-        // $statement -> execute(
-        //     [
-        //         'manager_id' => $manager,
-        //         'employee_id' => $lastInsertId
-        //     ] );
+        $statement -> execute( [ 'id' => $lastInsertId ]);
 
+        $job_title = $statement -> fetch();
 
-        $this -> signupObj -> db -> commit();
+        $result = true;
+        if( $job_title === 'employee' )
+        {
+
+            $this -> signupObj -> setTable('employee_management');
+            $this -> signupObj -> setColumn('manager_id, employee_id');
+            $this -> signupObj -> setValues('
+                manager_id =:manager_id,
+                employee_id =:employee_id'
+            );
+
+            $this -> signupObj -> insertQuery(
+                $this -> signupObj -> getTable(),
+                $this -> signupObj -> getColumn(),
+                $this -> signupObj -> getValues()
+            );
+
+            $statement = $this 
+            -> signupObj 
+            -> db
+            -> prepare( $this -> signupObj -> query() );
+            
+            $statement -> execute( 
+                [ 
+                    'manager_id' => $manager_id,
+                    'employee_id' => $lastInsertId
+                ]);
+            
+            
+        }
+
+        
+        if( $result )
+            $this -> signupObj -> db -> commit();
 
         echo "account has been created";
     }
