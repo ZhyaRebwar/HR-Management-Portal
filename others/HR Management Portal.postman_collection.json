@@ -43,8 +43,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.variables.unset(\"accessToken\");\r",
-							""
+							"pm.environment.set(\"valueToken\", 'null');"
 						],
 						"type": "text/javascript"
 					}
@@ -65,7 +64,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"sha\",\r\n    \"password\": \"sha13\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -122,7 +121,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"zhya\",\r\n    \"password\": \"zhya123\"\r\n}",
+					"raw": "{\r\n    \"username\": \"alfi\",\r\n    \"password\": \"alfi123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -197,7 +196,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost/HR-Management-Portal/{{id}}/delete/46",
+					"raw": "localhost/HR-Management-Portal/{{id}}/delete/45",
 					"host": [
 						"localhost"
 					],
@@ -205,7 +204,127 @@
 						"HR-Management-Portal",
 						"{{id}}",
 						"delete",
-						"46"
+						"45"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updating entire data",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{valueToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"bakol\", \r\n    \"email\":\"bakol@gmail.com\",\r\n    \"password\":\"bakol423\",\r\n    \"first_name\":\"bakol\",\r\n    \"last_name\":\"tea\",\r\n    \"title\":\"employee\",\r\n    \"salary\":4539\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/HR-Management-Portal/{{id}}/update/48",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"HR-Management-Portal",
+						"{{id}}",
+						"update",
+						"48"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updating entire data(self)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{valueToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"alfi\", \r\n    \"email\":\"alfi@gmail.com\",\r\n    \"password\":\"alfi123\",\r\n    \"first_name\":\"alfi\",\r\n    \"last_name\":\"solomon\",\r\n    \"title\":\"administrator\",\r\n    \"salary\":453999\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/HR-Management-Portal/{{id}}/update/",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"HR-Management-Portal",
+						"{{id}}",
+						"update",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updating data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{valueToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\":\"alfi523\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/HR-Management-Portal/{{id}}/update/",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"HR-Management-Portal",
+						"{{id}}",
+						"update",
+						""
 					]
 				}
 			},
