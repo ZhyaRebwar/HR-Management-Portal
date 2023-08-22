@@ -9,7 +9,8 @@
             "Controller\\": "Controller/",
             "Model\\": "Model/",
             "Operations\\": "Operations/", 
-            "Constants\\": "Constants"
+            "Constants\\": "Constants/",
+            "Exceptions\\": "Exceptions/"
         }
     }
 }
