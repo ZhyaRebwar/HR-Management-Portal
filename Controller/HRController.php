@@ -5,11 +5,13 @@ namespace Controller;
 use Model\Users;
 use Operations\DeleteTrait;
 use Operations\ViewTrait;
+use Operations\UpdateTrait;
 
 class HRController
 {
     use ViewTrait;
     use DeleteTrait;
+    use UpdateTrait;
 
     private Users $userObj;
 
@@ -17,6 +19,5 @@ class HRController
     {
         $this -> userObj = new Users();
     }
-    
-    
+       
 }
