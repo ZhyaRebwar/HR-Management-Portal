@@ -76,9 +76,9 @@ abstract class Model
 
         return $this;
     }
-    protected function set(string $string ): self
+    protected function set(): self
     {
-        $this->query .= " SET $string";
+        $this->query .= ' SET ';
 
         return $this;
     }
@@ -112,4 +112,15 @@ abstract class Model
 
         return $this;
     }
+
+    //-----------------------------------------------------------
+    //needs to be worked on
+    protected function column(string $string = "" ): self
+    {
+        $string = empty($string) ? '' : "$string";
+        $this->query .= " $string";
+
+        return $this;
+    }
+   
 }
