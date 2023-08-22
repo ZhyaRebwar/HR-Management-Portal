@@ -57,7 +57,7 @@ class App
             $body['users'] = $id;
 
             $this -> getClass( $id_user );
-
+            
             //making the uri match the routes
             $url = preg_replace( "/[0-9]+/", '[id]', $url);
         }
@@ -68,7 +68,7 @@ class App
         }
 
   
-        
+
         $this -> routes();
 
         (new Route)->resolve( $this->route[$method][$url] , $method, $body);
@@ -93,7 +93,12 @@ class App
             [
                 '/HR-Management-Portal/[id]/delete/[id]' => $this -> loginPathClass
             ],
-            'put' || 'patch' =>
+            'put' =>
+            [
+                '/HR-Management-Portal/[id]/update/[id]' => $this -> loginPathClass,
+                '/HR-Management-Portal/[id]/update/' => $this -> loginPathClass
+            ],
+            'patch' =>
             [
                 '/HR-Management-Portal/[id]/update/[id]' => $this -> loginPathClass,
                 '/HR-Management-Portal/[id]/update/' => $this -> loginPathClass
@@ -127,7 +132,6 @@ class App
         ];
         
         $this -> loginPathClass = $classes[$class];
-
     }
   
 }
