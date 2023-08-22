@@ -133,7 +133,8 @@ trait UpdateTrait
     $this -> userObj -> setColumn('
         username =:username,
         email =:email,
-        password =:password');
+        password =:password'
+    );
     $this -> userObj -> setCondition('id =:id');
 
     $this -> userObj -> updateQuery(
@@ -160,7 +161,8 @@ trait UpdateTrait
     $this -> userObj -> setTable('employees_information');
     $this -> userObj -> setColumn('
         first_name =:first_name,
-        last_name =:last_name');
+        last_name =:last_name'
+    );
 
     $this -> userObj -> updateQuery(
         $this -> userObj -> getTable(),
@@ -185,7 +187,8 @@ trait UpdateTrait
     $this -> userObj -> setTable('employee_benefits');
     $this -> userObj -> setColumn('
         title =:title,
-        salary =:salary');
+        salary =:salary'
+    );
 
     $this -> userObj -> updateQuery(
         $this -> userObj -> getTable(),
