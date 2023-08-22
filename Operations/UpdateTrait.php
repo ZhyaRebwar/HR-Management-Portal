@@ -3,6 +3,7 @@
 namespace Operations;
 
 use Classes\CompareUserTitles;
+use Exceptions\NoAuthException;
 
 trait UpdateTrait
 {
@@ -60,46 +61,54 @@ trait UpdateTrait
     public function patch(array $params): void
     {
 
-        $users = $params['users'];
-        $workOnUserId = $users['id_self'];
-        $workOnUserTitle = $users['title_self'];
-        $compareResult = true;
-
-        if( $users['id_user'] )
+        try
         {
-            $compareResult = (new CompareUserTitles) -> compareUpdate(
-                $users['title_self'], $users['title_user']
-            );
-            $workOnUserId = $users['id_user'];
-            $workOnUserTitle = $users['title_user'];
+
+            $users = $params['users'];
+            $workOnUserId = $users['id_self'];
+            $workOnUserTitle = $users['title_self'];
+            $compareResult = true;
+
+            if( $users['id_user'] )
+            {
+                $compareResult = (new CompareUserTitles) -> compareUpdate(
+                    $users['title_self'], $users['title_user']
+                );
+                $workOnUserId = $users['id_user'];
+                $workOnUserTitle = $users['title_user'];
+            }
+
+            $params['users'] = [
+                'id_user' => $workOnUserId,
+                'user_title' => $workOnUserTitle
+            ];
+
+            
+            //get all the old data from the database
+            $oldValues = $this -> getUser( $workOnUserId);
+            $params['oldValues'] = $oldValues;
+
+            //update the entire data
+            if( $compareResult )
+                $this -> updateUser(
+                    $params['username'],
+                    $params['email'],
+                    $params['password'],
+                    $params['first_name'],
+                    $params['last_name'],
+                    $params['title'],
+                    $params['salary'],
+                    $params['users'],
+                    $params['oldValues']
+                );
+            else
+                throw new NoAuthException;
+            
+
         }
-
-        $params['users'] = [
-            'id_user' => $workOnUserId,
-            'user_title' => $workOnUserTitle
-        ];
-
-        
-        //get all the old data from the database
-        $oldValues = $this -> getUser( $workOnUserId);
-        $params['oldValues'] = $oldValues;
-
-        //update the entire data
-        if( $compareResult )
-            $this -> updateUser(
-                $params['username'],
-                $params['email'],
-                $params['password'],
-                $params['first_name'],
-                $params['last_name'],
-                $params['title'],
-                $params['salary'],
-                $params['users'],
-                $params['oldValues']
-            );
-        else
+        catch( NoAuthException $e)
         {
-            //throw exception of now having the ability because of authentication
+            echo json_encode( ['Error' => $e -> errorMessage() ] );
         }
         
     }
