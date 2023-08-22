@@ -8,8 +8,6 @@ class Users extends Model
     public function createAccount(string $username, string $email, string $password): void
     {
 
-        // $transaction = $this->db->beginTransaction();
-
         $sql = $this
             ->insert()
             ->table('accounts')
@@ -108,6 +106,7 @@ class Users extends Model
     private string $table_name;
     private string $columns;
     private string $conditions;
+    private string $values;
 
     public function setTable( $table_name): void
     {
@@ -139,6 +138,16 @@ class Users extends Model
         return $this -> conditions;
     }
 
+    public function setValues( string $values): void
+    {
+        $this -> values = $values;
+    }
+
+    public function getValues(): string
+    {
+        return $this -> values;
+    } 
+
     public function updateQuery(
         string $table_name,
         string $columns,
@@ -149,7 +158,33 @@ class Users extends Model
             -> update()
             -> table( $table_name )
             -> set()
-            -> column($columns)
+            -> column( $columns )
             -> condition( $conditions );
     }
+
+    public function selectQuery(
+        string $columns,
+        string $table_name, 
+        string $conditions
+    ): void
+    {
+        $this 
+            -> select( $columns)
+            -> table( $table_name )
+            -> condition( $conditions );
+    }
+
+    public function insertQuery(
+        string $table_name,
+        string $columns,
+        string $values
+    ): void
+    {
+        $this
+            ->insert()
+            ->table($table_name)
+            ->columns( $columns )
+            ->values( $values );
+    }
+
 }
