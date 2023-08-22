@@ -19,23 +19,30 @@ class LoginController
     {
 
         // test();
+        try
+        {
 
-        $this -> loginObj -> checkLogin( $username, $password );
+            $this -> loginObj -> checkLogin( $username, $password );
 
-        $statement = $this 
-            -> loginObj 
-            -> db 
-            -> prepare( $this -> loginObj -> query() );
+            $statement = $this 
+                -> loginObj 
+                -> db 
+                -> prepare( $this -> loginObj -> query() );
 
-        $statement -> execute(
-            [
-                'username' => $username,
-                'password' => $password
-            ] );
+            $statement -> execute(
+                [
+                    'username' => $username,
+                    'password' => $password
+                ] );
 
-        $result = $statement -> fetch();
+            $result = $statement -> fetch();
 
-        (new TokenControl) -> createToken( $result );
+            (new TokenControl) -> createToken( $result );
+
+        }
+        catch ( \Throwable $e) {
+            echo json_encode( ['Error' => 'Your username or password is incorrect' ] );
+        }
 
         
     }
