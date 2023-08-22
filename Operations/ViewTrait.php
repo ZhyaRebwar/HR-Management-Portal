@@ -3,6 +3,7 @@
 namespace Operations;
 
 use Classes\CompareUserTitles;
+use Exceptions\NoAuthException;
 
 trait ViewTrait
 {
@@ -26,22 +27,29 @@ trait ViewTrait
     {
         //1. now we create a class to identify the job of the self and user title
         //to be able to check whether the information is allowed to share or not.
-        $compareResult = (new CompareUserTitles) -> compareView($title_self, $title_user);
-        
-        $checkEmployee = true;
-        //1.5 aya employee'aka sar ba supervisor'akaya...    awa bo supervisor.
-        if( $title_self === 'supervisor' )
-            $checkEmployee = $this -> checkEmployee($id_self, $id_user);
+        try{
+            $compareResult = (new CompareUserTitles) -> compareView($title_self, $title_user);
             
+            $checkEmployee = true;
+            //1.5 aya employee'aka sar ba supervisor'akaya...    awa bo supervisor.
+            if( $title_self === 'supervisor' )
+                $checkEmployee = $this -> checkEmployee($id_self, $id_user);
+                
 
-        //2. get the user from the database and do it by calling the view method.    
-        if( $compareResult & $checkEmployee)
-        {
-            $result = $this -> getUser( $id_user );
-            echo json_encode( $result );
+            //2. get the user from the database and do it by calling the view method.  
+            if( $compareResult && $checkEmployee)
+            {
+                $result = $this -> getUser( $id_user );
+                echo json_encode( $result );
+            }
+            else
+                throw new NoAuthException;
+        
         }
-        else
-            echo json_encode( ["Result" => 'Error' ]);
+        catch( NoAuthException $e)
+        {
+            echo json_encode( ['Error' => $e -> errorMessage() ] );
+        }
 
 
     }
