@@ -13,6 +13,7 @@ return array(
     'Operations\\' => array($baseDir . '/Operations'),
     'Model\\' => array($baseDir . '/Model'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
+    'Exceptions\\' => array($baseDir . '/Exceptions'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
     'Controller\\' => array($baseDir . '/Controller'),
     'Constants\\' => array($baseDir . '/Constants'),

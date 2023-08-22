@@ -35,6 +35,10 @@ class ComposerStaticInitddfd423d7c0c4ea5fdd92da6cdc23ba0
         array (
             'GrahamCampbell\\ResultType\\' => 26,
         ),
+        'E' => 
+        array (
+            'Exceptions\\' => 11,
+        ),
         'D' => 
         array (
             'Dotenv\\' => 7,
@@ -75,6 +79,10 @@ class ComposerStaticInitddfd423d7c0c4ea5fdd92da6cdc23ba0
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
+        ),
+        'Exceptions\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Exceptions',
         ),
         'Dotenv\\' => 
         array (
