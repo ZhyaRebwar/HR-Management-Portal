@@ -101,4 +101,55 @@ class Users extends Model
             ->table('accounts')
             ->condition('id =:id');
     }
+
+    
+
+    //-----------------------------------------
+    private string $table_name;
+    private string $columns;
+    private string $conditions;
+
+    public function setTable( $table_name): void
+    {
+        $this -> table_name = $table_name;
+    } 
+
+    public function getTable(): string
+    {
+        return $this -> table_name;
+    }
+
+    public function setColumn( string $colums ): void
+    {
+        $this -> columns = $colums;
+    }
+
+    public function getColumn(): string
+    {
+        return $this -> columns;
+    }
+
+    public function setCondition( string $conditions ): void
+    {
+        $this -> conditions = $conditions;
+    }
+
+    public function getCondition(): string
+    {
+        return $this -> conditions;
+    }
+
+    public function updateQuery(
+        string $table_name,
+        string $columns,
+        string $conditions
+    ): void
+    {
+        $this
+            -> update()
+            -> table( $table_name )
+            -> set()
+            -> column($columns)
+            -> condition( $conditions );
+    }
 }
