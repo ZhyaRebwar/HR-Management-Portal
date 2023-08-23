@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2023 at 12:02 AM
+-- Generation Time: Aug 23, 2023 at 12:39 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -35,23 +35,6 @@ CREATE TABLE `accounts` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `accounts`
---
-
-INSERT INTO `accounts` (`id`, `username`, `email`, `password`, `created_at`) VALUES
-(14, 'zhya', 'zhya@gmail.com', 'zhya123', '2023-08-08 07:40:45'),
-(19, 'sha', 'sha@gmail.com', 'sha13', '2023-08-08 08:29:22'),
-(34, 'frya', 'frya@gmail.com', 'frya12345', '2023-08-14 16:54:52'),
-(36, 'messi', 'messi@gmail.com', 'messi1234', '2023-08-14 16:57:47'),
-(37, 'rawezh', 'rawezh@gmail.com', 'rawezh12345', '2023-08-15 10:15:03'),
-(39, 'jack', 'jack@gmail.com', 'jack1345', '2023-08-16 13:41:09'),
-(42, 'marco', 'marco@gmail.com', 'marco543', '2023-08-19 18:39:51'),
-(43, 'gino', 'gino@gmail.com', 'gino1234', '2023-08-19 18:41:10'),
-(44, 'fred', 'fred@gmail.com', 'fred1234', '2023-08-19 18:41:57'),
-(45, 'alfi', 'alfi@gmail.com', 'alfi123', '2023-08-20 04:36:29'),
-(48, 'bako', 'bako@gmail.com', 'bako123', '2023-08-21 01:49:40');
-
 -- --------------------------------------------------------
 
 --
@@ -60,28 +43,13 @@ INSERT INTO `accounts` (`id`, `username`, `email`, `password`, `created_at`) VAL
 
 CREATE TABLE `employees_information` (
   `id` int(10) UNSIGNED NOT NULL,
-  `first_name` varchar(256) DEFAULT NULL,
-  `last_name` varchar(256) DEFAULT NULL,
-  `phone_number` int(11) DEFAULT NULL,
-  `date_of_birth` date DEFAULT NULL,
-  `city` varchar(256) DEFAULT NULL,
-  `relationship` int(1) DEFAULT NULL
+  `first_name` varchar(256) NOT NULL,
+  `last_name` varchar(256) NOT NULL,
+  `phone_number` int(11) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `city` varchar(256) NOT NULL,
+  `relationship` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `employees_information`
---
-
-INSERT INTO `employees_information` (`id`, `first_name`, `last_name`, `phone_number`, `date_of_birth`, `city`, `relationship`) VALUES
-(19, 'sha', 'rebwar', NULL, NULL, NULL, NULL),
-(36, 'Lionel', 'messi', NULL, NULL, NULL, NULL),
-(37, 'rawezh', 'mohammed', NULL, NULL, NULL, NULL),
-(39, 'jack', 'sparrow', NULL, NULL, NULL, NULL),
-(42, 'marco', 'polo', NULL, NULL, NULL, NULL),
-(43, 'gino', 'da', NULL, NULL, NULL, NULL),
-(44, 'fred', 'salazar', NULL, NULL, NULL, NULL),
-(45, 'alfi', 'solomon', NULL, NULL, NULL, NULL),
-(48, 'bako', 'tea', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -97,21 +65,6 @@ CREATE TABLE `employee_benefits` (
   `appointed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `employee_benefits`
---
-
-INSERT INTO `employee_benefits` (`id`, `title`, `salary`, `bonus`, `appointed_at`) VALUES
-(34, 'Administrator', 5222, 0, '2023-08-14 16:54:52'),
-(36, 'administrator', 1555, 0, '2023-08-14 16:57:47'),
-(37, 'employee', 2345, 0, '2023-08-15 10:15:03'),
-(39, 'hr', 333, 0, '2023-08-16 13:41:09'),
-(42, 'supervisor', 3353, 0, '2023-08-19 18:39:51'),
-(43, 'employee', 53, 0, '2023-08-19 18:41:10'),
-(44, 'employee', 539, 0, '2023-08-19 18:41:57'),
-(45, 'administrator', 9539, 0, '2023-08-20 04:36:29'),
-(48, 'hr', 4539, 0, '2023-08-21 01:49:40');
-
 -- --------------------------------------------------------
 
 --
@@ -122,13 +75,6 @@ CREATE TABLE `employee_management` (
   `manager_id` int(10) UNSIGNED NOT NULL,
   `employee_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `employee_management`
---
-
-INSERT INTO `employee_management` (`manager_id`, `employee_id`) VALUES
-(42, 43);
 
 --
 -- Indexes for dumped tables
@@ -160,8 +106,8 @@ ALTER TABLE `employee_benefits`
 --
 ALTER TABLE `employee_management`
   ADD PRIMARY KEY (`manager_id`,`employee_id`),
-  ADD UNIQUE KEY `manager_id` (`manager_id`),
-  ADD KEY `employee_id` (`employee_id`);
+  ADD UNIQUE KEY `employee_id` (`employee_id`) USING BTREE,
+  ADD KEY `manager_id` (`manager_id`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -171,7 +117,7 @@ ALTER TABLE `employee_management`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- Constraints for dumped tables
