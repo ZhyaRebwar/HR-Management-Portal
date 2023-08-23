@@ -21,8 +21,8 @@ class Users extends Model
         $sql = $this
             ->insert()
             ->table('employees_information')
-            ->columns('id, first_name, last_name')
-            ->values(":id, :first_name, :last_name");
+            ->columns('id, first_name, last_name, phone_number, date_of_birth, city, relationship')
+            ->values(":id, :first_name, :last_name, :phone_number, :date_of_birth, :city, :relationship");
     }
 
     public function addEmployeeBenefits(int $lastInsertId, string $title, int $salary): void
@@ -31,8 +31,8 @@ class Users extends Model
         $sql = $this
             ->insert()
             ->table('employee_benefits')
-            ->columns('id, title, salary')
-            ->values(":id, :title, :salary");
+            ->columns('id, title, salary, bonus, appointed_at')
+            ->values(":id, :title, :salary, :bonus, :appointed_at");
     }
 
     public function addEmployeeManager(): void
@@ -185,6 +185,7 @@ class Users extends Model
             ->table($table_name)
             ->columns( $columns )
             ->values( $values );
+            
     }
 
 }
