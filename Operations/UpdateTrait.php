@@ -14,8 +14,14 @@ trait UpdateTrait
         string $password, 
         string $first_name, 
         string $last_name,
+        int $phone_number,
+        string $date_of_birth,
+        string $city,
+        int $relationship,
         string $title,
         int $salary,
+        int $bonus,
+        string $appointed_at,
         array $users
         ): void
     {
@@ -47,8 +53,14 @@ trait UpdateTrait
                 $password, 
                 $first_name, 
                 $last_name,
+                $phone_number,
+                $date_of_birth, 
+                $city,
+                $relationship,
                 $title,
                 $salary,
+                $bonus,
+                $appointed_at,
                 $users
             );
         else
@@ -96,8 +108,14 @@ trait UpdateTrait
                     $params['password'],
                     $params['first_name'],
                     $params['last_name'],
+                    $params['phone_number'],
+                    $params['date_of_birth'],
+                    $params['city'],
+                    $params['relationship'],
                     $params['title'],
                     $params['salary'],
+                    $params['bonus'],
+                    $params['appointed_at'],
                     $params['users'],
                     $params['oldValues']
                 );
@@ -120,8 +138,14 @@ trait UpdateTrait
         string $password = null, 
         string $first_name = null, 
         string $last_name = null,
+        int $phone_number = null,
+        string $date_of_birth = null,
+        string $city = null,
+        int $relationship = null,
         string $title = null,
         int $salary = null,
+        int $bonus = null,
+        string $appointed_at = null,
         array $users,
         array $oldValues = null
     ): void
@@ -161,7 +185,11 @@ trait UpdateTrait
     $this -> userObj -> setTable('employees_information');
     $this -> userObj -> setColumn('
         first_name =:first_name,
-        last_name =:last_name'
+        last_name =:last_name,
+        phone_number =:phone_number,
+        date_of_birth =:date_of_birth,
+        city =:city,
+        relationship =:relationship'
     );
 
     $this -> userObj -> updateQuery(
@@ -179,7 +207,11 @@ trait UpdateTrait
         [
             'id' => $users['id_user'],
             'first_name' => $first_name ? $first_name : $oldValues['first_name'],
-            'last_name' => $last_name ? $last_name : $oldValues['last_name']
+            'last_name' => $last_name ? $last_name : $oldValues['last_name'],
+            'phone_number' => $phone_number ? $phone_number : $oldValues['phone_number'],
+            'date_of_birth' => $date_of_birth ? $date_of_birth : $oldValues['date_of_birth'],
+            'city' => $city ? $city : $oldValues['city'],
+            'relationship' => $relationship ? $relationship : $oldValues['relationship']
         ]);
     
 
@@ -187,7 +219,9 @@ trait UpdateTrait
     $this -> userObj -> setTable('employee_benefits');
     $this -> userObj -> setColumn('
         title =:title,
-        salary =:salary'
+        salary =:salary,
+        bonus =:bonus,
+        appointed_at =:appointed_at'
     );
 
     $this -> userObj -> updateQuery(
@@ -205,7 +239,9 @@ trait UpdateTrait
         [
             'id' => $users['id_user'],
             'title' => $title ? $title : $oldValues['title'],
-            'salary' => $salary ? $salary : $oldValues['salary']
+            'salary' => $salary ? $salary : $oldValues['salary'],
+            'bonus' => $bonus ? $bonus : $oldValues['bonus'],
+            'appointed_at' => $appointed_at ? $appointed_at : $oldValues['appointed_at']
         ]);
 
     $this -> userObj -> db -> commit();
