@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2023 at 12:39 PM
+-- Generation Time: Aug 23, 2023 at 01:03 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -35,6 +35,13 @@ CREATE TABLE `accounts` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`id`, `username`, `email`, `password`, `created_at`) VALUES
+(128, 'niko', 'andy@gmail.com', 'andy89', '2023-08-23 10:46:38');
+
 -- --------------------------------------------------------
 
 --
@@ -51,6 +58,13 @@ CREATE TABLE `employees_information` (
   `relationship` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `employees_information`
+--
+
+INSERT INTO `employees_information` (`id`, `first_name`, `last_name`, `phone_number`, `date_of_birth`, `city`, `relationship`) VALUES
+(128, 'andy', 'silva', 2147483647, '2003-08-14', 'london', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -64,6 +78,13 @@ CREATE TABLE `employee_benefits` (
   `bonus` int(11) NOT NULL,
   `appointed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employee_benefits`
+--
+
+INSERT INTO `employee_benefits` (`id`, `title`, `salary`, `bonus`, `appointed_at`) VALUES
+(128, 'administrator', 800, 500, '2020-05-18 02:55:45');
 
 -- --------------------------------------------------------
 
@@ -117,7 +138,7 @@ ALTER TABLE `employee_management`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- Constraints for dumped tables

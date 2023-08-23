@@ -149,7 +149,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"andy\",\r\n    \"email\":\"andy@gmail.com\",\r\n    \"password\":\"andy89\",\r\n    \"first_name\":\"andy\",\r\n    \"last_name\":\"silva\",\r\n    \"phone_number\":7501112233,\r\n    \"date_of_birth\":\"2003-08-14\",\r\n    \"city\":\"london\",\r\n    \"relationship\":0,\r\n    \"title\":\"employee\",\r\n    \"salary\":555,\r\n    \"bonus\":1,\r\n    \"manager_id\":42\r\n\r\n}",
+					"raw": "{\r\n    \"username\":\"niko\",\r\n    \"email\":\"niko@gmail.com\",\r\n    \"password\":\"niko89\",\r\n    \"first_name\":\"andy\",\r\n    \"last_name\":\"silva\",\r\n    \"phone_number\":7501112233,\r\n    \"date_of_birth\":\"2003-08-14\",\r\n    \"city\":\"london\",\r\n    \"relationship\":0,\r\n    \"title\":\"administrator\",\r\n    \"salary\":555,\r\n    \"bonus\":1,\r\n    \"appointed_at\":\"2020-05-18 5:55:45\"\r\n    // ,\r\n    // \"manager_id\":\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
