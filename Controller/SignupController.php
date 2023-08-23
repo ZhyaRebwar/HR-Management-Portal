@@ -26,9 +26,8 @@ class SignupController
         string $title,
         int $salary,
         int $bonus,
-        // string $appointed_at,
+        string $appointed_at,
         int $manager_id = null
-        // int $employee_id = null
         ): void
     {
 
@@ -36,6 +35,8 @@ class SignupController
 
         $this -> signupObj -> db -> beginTransaction();
 
+
+        //first insert
         $this -> signupObj -> createAccount( $username, $email, $password);
 
         $statement = $this 
@@ -60,10 +61,15 @@ class SignupController
             -> db 
             -> prepare($this -> signupObj -> query() );
 
+
         $statement -> execute([ 
             'id' => $lastInsertId,
             'first_name' => $first_name,
-            'last_name' => $last_name
+            'last_name' => $last_name,
+            'phone_number' => $phone_number,
+            'date_of_birth' => $date_of_birth,
+            'city' => $city,
+            'relationship' => $relationship
         ]);
 
         //third insert
@@ -78,7 +84,9 @@ class SignupController
             [ 
             'id' => $lastInsertId,
             'title' => $title,
-            'salary' => $salary
+            'salary' => $salary,
+            'bonus' => $bonus,
+            'appointed_at' => $appointed_at
             ]);
 
         // fourth insert adding manager to the employee
